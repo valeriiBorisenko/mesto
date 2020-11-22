@@ -1,0 +1,14 @@
+.profile__add-icon {
+  background-image: url(../../../image/icon/Add_Button.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 16px;
+  width: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .profile__add-icon {
+    height: 24px;
+    width: 24px;
+  }
+}
