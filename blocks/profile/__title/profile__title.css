@@ -14,7 +14,7 @@
     text-align: start;
   }
 }
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 935px) {
   .profile__title {
     font-size: 42px;
     line-height: 48px;
