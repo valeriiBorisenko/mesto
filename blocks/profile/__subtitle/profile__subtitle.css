@@ -8,7 +8,7 @@
   margin: 0;
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 935px) {
   .profile__subtitle {
     font-size: 18px;
     line-height: 22px;

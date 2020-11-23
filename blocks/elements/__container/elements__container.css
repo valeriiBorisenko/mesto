@@ -1,0 +1,21 @@
+.elements__container {
+  padding: 0;
+  margin: 0;
+
+  display: grid;
+  grid-template-rows: 1fr;
+  row-gap: 20px;
+}
+
+@media screen and (min-width: 620px) {
+  .elements__container {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 17px;
+  }
+}
+
+@media screen and (min-width: 935px) {
+  .elements__container {
+    grid-template-columns: repeat(3, 282px);
+  }
+}
