@@ -34,3 +34,11 @@ function popupWindowSubmit(event){
   profileSubtitle.textContent = popupFormSubtitle.value;
 }
 
+debugger
+const elementButtons = [...document.querySelectorAll('.element__button')];
+
+elementButtons.forEach((elementButton) =>{
+  elementButton.addEventListener('click', function (){
+    elementButton.classList.toggle('element__button_active')
+  })
+});
