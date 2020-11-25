@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./pages/index.css">
+  <link rel="shortcut icon" href="./image/icon/favicon.ico">
+  <title>Mesto</title>
+</head>
+
+<body class="page">
+
+  <header class="header">
+    <a class="link-opacity header__logo" href=""></a>
+  </header>
+
+  <main class="content">
+    <section class="profile">
+      <div class="profile__content">
+        <div class="profile__avatar"></div>
+        <div class="profile__container">
+          <div class="profile__title-container">
+            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <button class="link-opacity profile__edit-button" type="button">
+            </button>
+          </div>
+          <p class="profile__subtitle">Исследователь океана</p>
+        </div>
+      </div>
+      <button class="link-opacity profile__add-button" type="button">
+      </button>
+    </section>
+
+    <section class="elements">
+      <ul class="elements__container">
+        <li class="element">
+          <img class="element__image" src="./image/elements/van.jpeg" alt="вид на минивэн">
+          <div class="element__container">
+            <h2 class="element__title">Поездка на море с досками</h2>
+            <button class="link-opacity element__button" type="button"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img class="element__image" src="./image/elements/morning.jpeg" alt="вид на море из минивэна">
+          <div class="element__container">
+            <h2 class="element__title">Доброе утро</h2>
+            <button class="link-opacity element__button" type="button"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img class="element__image" src="./image/elements/coffee.jpeg" alt="турка с кофе на огне">
+          <div class="element__container">
+            <h2 class="element__title">Свежий кофе у костра</h2>
+            <button class="link-opacity element__button" type="button"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img class="element__image" src="./image/elements/view_from_van.jpeg" alt="девушка на фоне озера из минивэна">
+          <div class="element__container">
+            <h2 class="element__title">Вид из машины</h2>
+            <button class="link-opacity element__button" type="button"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img class="element__image" src="./image/elements/boat.jpeg" alt="вид на озеро, гор и пришвартованную лодку">
+          <div class="element__container">
+            <h2 class="element__title">Горное озеро</h2>
+            <button class="link-opacity element__button" type="button"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img class="element__image" src="./image/elements/road_trip.jpeg"
+            alt="девушка зашнуровывает шнурки в минивэне">
+          <div class="element__container">
+            <h2 class="element__title">Подготовка к путешествию</h2>
+            <button class="link-opacity element__button" type="button"></button>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <h3 class="footer__title">&copy; 2020. Mesto Russia</h3>
+  </footer>
+
+  <div class="popup">
+    <form class="popup__window">
+      <button class="link-opacity popup__close-button" type="button"></button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <input class="popup__form-title" type="text" id="name" placeholder="Имя">
+      <input class="popup__form-subtitle" type="text" id="about" placeholder="О себе">
+      <button class="link-opacity popup__save-button" type="submit">Сохранить</button>
+    </form>
+  </div>
+
+  <script src="./scripts/index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+
+  padding: 0 19px;
+}
+
+@media screen and (min-width: 935px) {
+  .content {
+    max-width: 880px;
+    padding: 0;
+  }
+}

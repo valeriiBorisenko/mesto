@@ -1,0 +1,17 @@
+.element__button {
+  background-image: url(../../../image/icon/heart_icon.svg);
+  background-position: center;
+  background-size: cover;
+  background-color: unset;
+  border: none;
+  outline-color: rgb(0%, 0%, 0%, 0.2);
+
+  padding: 0;
+
+  width: 20px;
+  height: 18px;
+}
+
+.element__button:target {
+  background-image: url(../../../image/icon/heart_icon_black.svg);
+}
