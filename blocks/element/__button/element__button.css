@@ -3,7 +3,8 @@
   background-position: center;
   background-size: cover;
   background-color: unset;
-  border: unset;
+  border: none;
+  outline-color: rgb(0%, 0%, 0%, 0.2);
 
   padding: 0;
 
