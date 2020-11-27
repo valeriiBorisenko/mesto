@@ -7,7 +7,7 @@
   margin-bottom: 42px;
 
   min-height: 55px;
-  max-width: 880px;
+  width: 100%;
 
   border-bottom: 1px solid rgb(33%, 33%, 33%, 0.7);
 }
@@ -17,5 +17,6 @@
     margin-top: 45px;
     margin-bottom: 40px;
     min-height: 73px;
+    max-width: 880px;
   }
 }
