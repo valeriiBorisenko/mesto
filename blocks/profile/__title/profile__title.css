@@ -9,16 +9,10 @@
 
   width: min-content;
 
-  text-align: center;
   margin: 0;
   padding: 0;
 }
 
-@media screen and (min-width: 768px) {
-  .profile__title {
-    text-align: start;
-  }
-}
 @media screen and (min-width: 935px) {
   .profile__title {
     font-size: 42px;

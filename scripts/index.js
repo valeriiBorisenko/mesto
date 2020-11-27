@@ -1,43 +1,34 @@
 const profileButtonEdit = document.querySelector('.profile__edit-button');
-const popupButtonClose = document.querySelector('.popup__close-button');
 const popup = document.querySelector('.popup')
 const popupVisible = document.querySelector('.popup_visible');
-
 let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
+let popupFormTitle = document.querySelector('.popup__form-text_type_title');
+let popupFormSubtitle = document.querySelector('.popup__form-text_type_subtitle');
+
+function clickPopupVisibility(){
+  popup.classList.add('popup_visible');
+  popupFormTitle.value = profileTitle.textContent;
+  popupFormSubtitle.value = profileSubtitle.textContent;
+}
+
+profileButtonEdit.addEventListener('click', clickPopupVisibility);
+
+const popupButtonClose = document.querySelector('.popup__close-button');
 const popupWindow = document.querySelector('.popup__window')
-let popupFormTitle = document.querySelector('.popup__form-title');
-let popupFormSubtitle = document.querySelector('.popup__form-subtitle');
-const popupSaveButton = document.querySelector('.popup__save-button')
 
-profileButtonEdit.addEventListener('click', togglePopupVisibility);
-popupButtonClose.addEventListener('click', togglePopupVisibility);
-
-function togglePopupVisibility(){
-  popup.classList.toggle('popup_visible');
+function clickPopupHide(){
+  popup.classList.remove('popup_visible',);
+  popupWindow.reset();
 }
 
-popupSaveButton.addEventListener('click', removePopupWindowSubmit);
-
-  function removePopupWindowSubmit(){
-    popup.classList.remove('popup_visible');
-}
-
-popupFormTitle.value = profileTitle.textContent;
-popupFormSubtitle.value = profileSubtitle.textContent;
-
-popupWindow.addEventListener('submit', popupWindowSubmit);
+popupButtonClose.addEventListener('click', clickPopupHide);
 
 function popupWindowSubmit(event){
   event.preventDefault();
   profileTitle.textContent = popupFormTitle.value;
   profileSubtitle.textContent = popupFormSubtitle.value;
+  clickPopupHide();
 }
 
-const elementButtons = [...document.querySelectorAll('.element__button')];
-
-elementButtons.forEach((elementButton) =>{
-  elementButton.addEventListener('click', function (){
-    elementButton.classList.toggle('element__button_active')
-  })
-});
+popupWindow.addEventListener('submit', popupWindowSubmit);
