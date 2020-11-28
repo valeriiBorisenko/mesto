@@ -12,6 +12,14 @@
 
   border-radius: 2px;
   border: unset;
+
+  transition: opacity 0.3s linear;
+  cursor: pointer;
+}
+
+.popup__save-button:hover {
+  opacity: 0.8;
+  transition: opacity 0.3s linear;
 }
 
 @media screen and (min-width: 768px) {
