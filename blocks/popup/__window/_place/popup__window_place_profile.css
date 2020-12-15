@@ -1,0 +1,15 @@
+.popup__window_place_profile {
+  padding: 25px 22px;
+  margin: 0px 19px;
+
+  width: 430px;
+  min-height: 322px;
+}
+
+@media screen and (min-width: 768px) {
+  .popup__window_place_profile {
+    margin: auto;
+    min-height: 330px;
+    padding: 34px 36px 37px;
+  }
+}

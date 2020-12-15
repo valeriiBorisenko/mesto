@@ -35,54 +35,6 @@
 
     <section class="elements">
       <ul class="elements__container">
-        <li class="element">
-          <div class="element__image" style="background-image: url(./image/elements/van.jpeg);" role="img"
-            aria-label="вид на минивэн"></div>
-          <div class="element__container">
-            <h2 class="element__title">Поездка на море с досками</h2>
-            <button class="element__button" type="button" aria-label="нравится"></button>
-          </div>
-        </li>
-        <li class="element">
-          <div class="element__image" style="background-image: url(./image/elements/morning.jpeg);" role="img"
-            aria-label="вид на море из минивэна"></div>
-          <div class="element__container">
-            <h2 class="element__title">Доброе утро</h2>
-            <button class="element__button" type="button" aria-label="нравится"></button>
-          </div>
-        </li>
-        <li class="element">
-          <div class="element__image" style="background-image: url(./image/elements/coffee.jpeg);" role="img"
-            aria-label="турка с кофе у огня"></div>
-          <div class="element__container">
-            <h2 class="element__title">Свежий кофе у костра</h2>
-            <button class="element__button" type="button" aria-label="нравится"></button>
-          </div>
-        </li>
-        <li class="element">
-          <div class="element__image" style="background-image: url(./image/elements/view_from_van.jpeg);" role="img"
-            aria-label="девушка на фоне озера из минивэна"></div>
-          <div class="element__container">
-            <h2 class="element__title">Вид из машины</h2>
-            <button class="element__button" type="button" aria-label="нравится"></button>
-          </div>
-        </li>
-        <li class="element">
-          <div class="element__image" style="background-image: url(./image/elements/boat.jpeg)" role="img"
-            aria-label="вид на озеро, горы и пришвартованную лодку"></div>
-          <div class="element__container">
-            <h2 class="element__title">Горное озеро</h2>
-            <button class="element__button" type="button" aria-label="нравится"></button>
-          </div>
-        </li>
-        <li class="element">
-          <div class="element__image" style="background-image: url(./image/elements/road_trip.jpeg);" role="img"
-            aria-label="девушка зашнуровывает шнурки в минивэне"></div>
-          <div class="element__container">
-            <h2 class="element__title">Подготовка к путешествию</h2>
-            <button class="element__button" type="button" aria-label="нравится"></button>
-          </div>
-        </li>
       </ul>
     </section>
   </main>
@@ -91,17 +43,51 @@
     <p class="footer__title">&copy; 2020. Mesto Russia</p>
   </footer>
 
-  <section class="popup">
-    <form class="popup__window" name="edit_profile">
-      <button class="link-opacity popup__close-button" type="button" aria-label="закрыть"></button>
+  <section class="popup popup_place_profile">
+    <form class="popup__window popup__window_place_profile" name="edit_profile">
+      <button class="link-opacity popup__close-button popup__close-button_place_profile" type="button"
+        aria-label="закрыть"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <input class="popup__form-text popup__form-text_type_title" type="text" id="name" name="name" required
+      <input class="popup__form-text popup__form-text_type_profile-name" type="text" id="name" name="name" required
         placeholder="Имя">
-      <input class="popup__form-text popup__form-text_type_subtitle" type="text" id="about" name="about" required
+      <input class="popup__form-text popup__form-text_type_profile-about" type="text" id="about" name="about" required
         placeholder="О себе">
       <button class="popup__save-button" type="submit">Сохранить</button>
     </form>
   </section>
+
+  <section class="popup popup_place_element">
+    <form class="popup__window popup__window_place_element" name="add_profile">
+      <button class="link-opacity popup__close-button popup__close-button_place_element" type="button"
+        aria-label="закрыть"></button>
+      <h2 class="popup__title popup__title_place_element">Новое место</h2>
+      <input class="popup__form-text popup__form-text_type_element-name" type="text" id="image-name" name="image-name"
+        required placeholder="Название">
+      <input class="popup__form-text popup__form-text_type_image" type="text" id="image" name="image" required
+        placeholder="Ссылка на картинку">
+      <button class="popup__save-button" type="submit">Создать</button>
+    </form>
+  </section>
+
+  <section class="popup popup_place_image">
+    <figure class="popup__window popup__window_place_image">
+      <button class="link-opacity popup__close-button popup__close-button_place_image" type="button"
+        aria-label="закрыть"></button>
+      <img class="popup__image" src="#" alt="">
+      <figcaption class="popup__title popup__title_place_image"></figcaption>
+    </figure>
+  </section>
+
+  <template id="elementClone">
+    <li class="element">
+      <button class="element__buttonDelete" type="button" aria-label="удалить"></button>
+      <img class="element__image" src="#" alt="">
+      <div class="element__container">
+        <h2 class="element__title"></h2>
+        <button class="element__buttonLike" type="button" aria-label="нравится"></button>
+      </div>
+    </li>
+  </template>
 
   <script src="./scripts/index.js"></script>
 </body>

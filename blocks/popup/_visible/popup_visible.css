@@ -1,4 +1,7 @@
 .popup_visible {
   display: flex;
-  padding-top: 20px;
+
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 1s ease;
 }
