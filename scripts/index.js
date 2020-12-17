@@ -136,7 +136,7 @@ function closeImage(){
 
 /*Обработчики*/
 
-popupFormProfile.addEventListener('submit', submitPopupProfile);
+popupFormProfile.addEventListener('submit', submitProfile);
 popupFormElement.addEventListener('submit', submitNewElement);
 
 editProfileButton.addEventListener('click', openPopupProfile);
