@@ -8,8 +8,8 @@ const profileAbout = document.querySelector('.profile__subtitle');
 
 const popupPlaceProfile = document.querySelector('.popup_place_profile');
 const popupFormProfile = document.querySelector('.popup__form_place_profile');
-const popupTypeProfileName = document.querySelector('.popup__form-text_type_profile-name');
-const popupTypeProfileAbout = document.querySelector('.popup__form-text_type_profile-about');
+const popupInputProfileName = document.querySelector('.popup__form-text_type_profile-name');
+const popupInputProfileAbout = document.querySelector('.popup__form-text_type_profile-about');
 
 const editProfileButton = document.querySelector('.profile__edit-button');
 const closeProfileButton = document.querySelector('.popup__close-button_place_profile');
@@ -20,8 +20,8 @@ const elementTemplate = document.querySelector('#element-template').content;
 
 const popupPlaceElement = document.querySelector('.popup_place_element');
 const popupFormElement = document.querySelector('.popup__form_place_element');
-const popupTypeElementTitle = document.querySelector('.popup__form-text_type_element-name');
-const popupTypeElementImage = document.querySelector('.popup__form-text_type_image');
+const popupInputElementTitle = document.querySelector('.popup__form-text_type_element-name');
+const popupInputElementImage = document.querySelector('.popup__form-text_type_image');
 
 const addElementButton = document.querySelector('.profile__add-button');
 const closeElementButton = document.querySelector('.popup__close-button_place_element');
@@ -52,15 +52,15 @@ function resetForm(popupForm){
 
 function submitProfile(event){
   event.preventDefault();
-  profileName.textContent = popupTypeProfileName.value;
-  profileAbout.textContent = popupTypeProfileAbout.value;
+  profileName.textContent = popupInputProfileName.value;
+  profileAbout.textContent = popupInputProfileAbout.value;
   clickPopupHide(popupPlaceProfile);
   resetForm(popupFormProfile)
 }
 
 function openPopupProfile(){
-  popupTypeProfileName.value = profileName.textContent;
-  popupTypeProfileAbout.value = profileAbout.textContent;
+  popupInputProfileName.value = profileName.textContent;
+  popupInputProfileAbout.value = profileAbout.textContent;
   clickPopupVisibility(popupPlaceProfile);
 }
 
@@ -104,8 +104,8 @@ function addNewElement(){
 
 function submitNewElement(event){
   event.preventDefault();
-  titleElementNew = popupTypeElementTitle.value;
-  imageElementNew = popupTypeElementImage.value;
+  titleElementNew = popupInputElementTitle.value;
+  imageElementNew = popupInputElementImage.value;
   addNewElement(popupFormElement);
   clickPopupHide(popupPlaceElement);
   resetForm(popupFormElement);
