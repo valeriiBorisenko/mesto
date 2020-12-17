@@ -3,6 +3,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding: 0;
   padding-bottom: 12px;
+  margin-bottom: 30px;
 
   width: 100%;
 
@@ -11,4 +12,14 @@
   line-height: 17px;
 
   color: #000000;
+}
+
+.popup__form-text:last-of-type {
+  margin-bottom: 45px;
+}
+
+@media screen and (min-width: 768px) {
+  .popup__form-text:last-of-type {
+    margin-bottom: 48px;
+  }
 }

@@ -44,29 +44,33 @@
   </footer>
 
   <section class="popup popup_place_profile">
-    <form class="popup__window popup__window_place_profile" name="edit_profile">
+    <div class="popup__window popup__window_place_profile">
       <button class="link-opacity popup__close-button popup__close-button_place_profile" type="button"
         aria-label="закрыть"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <input class="popup__form-text popup__form-text_type_profile-name" type="text" id="name" name="name" required
-        placeholder="Имя">
-      <input class="popup__form-text popup__form-text_type_profile-about" type="text" id="about" name="about" required
-        placeholder="О себе">
-      <button class="popup__save-button" type="submit">Сохранить</button>
-    </form>
+      <form class="popup__form popup__form_place_profile" name="edit_profile">
+        <input class="popup__form-text popup__form-text_type_profile-name" type="text" id="name" name="name" required
+          placeholder="Имя">
+        <input class="popup__form-text popup__form-text_type_profile-about" type="text" id="about" name="about" required
+          placeholder="О себе">
+        <button class="popup__save-button" type="submit">Сохранить</button>
+      </form>
+    </div>
   </section>
 
   <section class="popup popup_place_element">
-    <form class="popup__window popup__window_place_element" name="add_profile">
+    <div class="popup__window popup__window_place_element">
       <button class="link-opacity popup__close-button popup__close-button_place_element" type="button"
         aria-label="закрыть"></button>
       <h2 class="popup__title popup__title_place_element">Новое место</h2>
-      <input class="popup__form-text popup__form-text_type_element-name" type="text" id="image-name" name="image-name"
-        required placeholder="Название">
-      <input class="popup__form-text popup__form-text_type_image" type="text" id="image" name="image" required
-        placeholder="Ссылка на картинку">
-      <button class="popup__save-button" type="submit">Создать</button>
-    </form>
+      <form class="popup__form popup__form_place_element" name="add_profile">
+        <input class="popup__form-text popup__form-text_type_element-name" type="text" id="image-name" name="image-name"
+          required placeholder="Название">
+        <input class="popup__form-text popup__form-text_type_image" type="url" id="image" name="image" required
+          placeholder="Ссылка на картинку">
+        <button class="popup__save-button" type="submit">Создать</button>
+      </form>
+    </div>
   </section>
 
   <section class="popup popup_place_image">
@@ -78,17 +82,18 @@
     </figure>
   </section>
 
-  <template id="elementClone">
+  <template id="element-template">
     <li class="element">
-      <button class="element__buttonDelete" type="button" aria-label="удалить"></button>
+      <button class="element__button-delete" type="button" aria-label="удалить"></button>
       <img class="element__image" src="#" alt="#">
       <div class="element__container">
         <h2 class="element__title"></h2>
-        <button class="element__buttonLike" type="button" aria-label="нравится"></button>
+        <button class="element__button-like" type="button" aria-label="нравится"></button>
       </div>
     </li>
   </template>
 
+  <script src="./scripts/initial-element.js"></script>
   <script src="./scripts/index.js"></script>
 </body>
 
