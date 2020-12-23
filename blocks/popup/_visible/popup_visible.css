@@ -3,5 +3,5 @@
 
   visibility: visible;
   opacity: 1;
-  transition: opacity 1s ease;
+  transition: opacity .6s ease;
 }
