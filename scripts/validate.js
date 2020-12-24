@@ -78,7 +78,7 @@ function clearErrorMessage(form, config) {
   });
 }
 
-const enableConfig = {
+const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__form-text',
   submitButtonSelector: '.popup__save-button',
@@ -86,3 +86,5 @@ const enableConfig = {
   inputErrorClass: 'popup__form-text_state_invalid',
   errorClass: 'error_active'
 }; 
+
+enableValidation(validationConfig);
