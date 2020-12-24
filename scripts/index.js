@@ -32,16 +32,14 @@ const closeImageButton = document.querySelector('.popup__close-button_place_imag
 
 /*function:*/
 
-enableValidation(enableConfig);
-
 /*popup*/
-function clickPopupVisibility(popup){
+function openPopup(popup){
   popup.classList.add('popup_visible');
   document.addEventListener('keyup', clickKeyEscape);
   document.addEventListener('click', clickOutsidePopup);
 }
 
-function clickPopupHide(popup){
+function closePopup(popup){
   popup.classList.remove('popup_visible');
   document.removeEventListener('keyup', clickKeyEscape);
   document.removeEventListener('click', clickOutsidePopup);
@@ -59,20 +57,20 @@ function submitProfile(evt){
   profileName.textContent = popupInputProfileName.value;
   profileAbout.textContent = popupInputProfileAbout.value;
   resetForm(popupFormProfile)
-  clickPopupHide(popupPlaceProfile);
+  closePopup(popupPlaceProfile);
 }
 
 function openPopupProfile(){
   popupInputProfileName.value = profileName.textContent;
   popupInputProfileAbout.value = profileAbout.textContent;
-  checkSubmitButton(enableConfig);
-  clickPopupVisibility(popupPlaceProfile);
+  checkSubmitButton(validationConfig);
+  openPopup(popupPlaceProfile);
 }
 
 function closePopupProfile(){
   resetForm(popupFormProfile)
-  clearErrorMessage(popupFormProfile, enableConfig);
-  clickPopupHide(popupPlaceProfile);
+  clearErrorMessage(popupFormProfile, validationConfig);
+  closePopup(popupPlaceProfile);
 }
 
 /*element*/
@@ -114,19 +112,19 @@ function submitNewElement(evt){
   titleElementNew = popupInputElementTitle.value;
   imageElementNew = popupInputElementImage.value;
   addNewElement({link: imageElementNew, name: titleElementNew}, elementContainer);
-  clickPopupHide(popupPlaceElement);
+  closePopup(popupPlaceElement);
   resetForm(popupFormElement);
   }
 
-function openPopupElement(){
-  checkSubmitButton(enableConfig);
-  clickPopupVisibility(popupPlaceElement);
+function openPopupAddElement(){
+  checkSubmitButton(validationConfig);
+  openPopup(popupPlaceElement);
 }
 
- function closePopupElement(){
+ function closePopupAddElement(){
     resetForm(popupFormElement);
-    clearErrorMessage(popupFormElement, enableConfig);
-    clickPopupHide(popupPlaceElement);
+    clearErrorMessage(popupFormElement, validationConfig);
+    closePopup(popupPlaceElement);
  } 
 
 /*image */
@@ -135,11 +133,11 @@ const openImage = ({link, name})=>()=>{
     popupImage.src = link;
     popupImage.alt = name;
     popupTitle.textContent = name;
-    clickPopupVisibility(popupPlaceImage);
+    openPopup(popupPlaceImage);
 }
 
 function closeImage(){
-  clickPopupHide(popupPlaceImage);
+  closePopup(popupPlaceImage);
 }
 
 /*close popup another options*/
@@ -147,16 +145,13 @@ function closeImage(){
 function clickKeyEscape(evt){
   const popupVisible = document.querySelector('.popup_visible')
     if(evt.key === "Escape"){
-      clickPopupHide(popupVisible);
-      resetForm(popupFormElement)
+      closePopup(popupVisible);
     }
 }
 
 function clickOutsidePopup(evt){
-  const popupVisible = document.querySelector('.popup_visible');
-  if(evt.target.contains(popupVisible)){
-    clickPopupHide(popupVisible)
-    resetForm(popupFormElement)
+  if(evt.target.classList.contains('popup_visible')){
+    closePopup(evt.target);
   }
 }
 
@@ -166,10 +161,10 @@ popupFormProfile.addEventListener('submit', submitProfile);
 popupFormElement.addEventListener('submit', submitNewElement);
 
 editProfileButton.addEventListener('click', openPopupProfile);
-addElementButton.addEventListener('click', openPopupElement);
+addElementButton.addEventListener('click', openPopupAddElement);
 
 closeProfileButton.addEventListener('click', closePopupProfile);
-closeElementButton.addEventListener('click', closePopupElement);
+closeElementButton.addEventListener('click', closePopupAddElement);
 closeImageButton.addEventListener('click', closeImage);
 
 renderElements();
