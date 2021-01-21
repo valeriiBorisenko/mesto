@@ -85,15 +85,18 @@ function closePopupProfile(){
 
 /*element*/
 
-function addNewElement(data, container){
-  container.prepend(composeElement(data));
-}
-
 function submitNewElement(evt){
   evt.preventDefault();
-  titleElementNew = popupInputElementTitle.value;
-  imageElementNew = popupInputElementImage.value;
-  addNewElement({link: imageElementNew, name: titleElementNew}, elementContainer);
+  
+  const data = {
+  name: popupInputElementTitle.value,
+  link: popupInputElementImage.value,
+  }
+  
+  const newCard = new Card(data, '#element-template');
+  const newCardElement = newCard.generateCard();
+  
+  elementContainer.prepend(newCardElement);
   closePopup(popupPlaceElement);
  // resetForm(popupFormElement);
   }
