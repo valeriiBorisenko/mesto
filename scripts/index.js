@@ -37,13 +37,17 @@ const closeImageButton = document.querySelector('.popup__close-button_place_imag
 /*Card OPP*/
 
 initialElements.forEach((initialElement) => {
-  const card = new Card(initialElement, '#element-template');
-  const cardElement = card.generateCard();
-
-  elementContainer.append(cardElement);
+  elementContainer.append(cardElementObj(initialElement));
 });
 
+const formValid = new FormValidator(validationConfig);
+const clearError = new FormValidator(validationConfig);
 
+
+function cardElementObj(obj){
+  const card = new Card(obj, '#element-template')
+  return card.generateCard();
+}
 
 /*popup*/
 export function openPopup(popup){
@@ -74,10 +78,8 @@ function submitProfile(evt){
 function openPopupProfile(){
   popupInputProfileName.value = profileName.textContent;
   popupInputProfileAbout.value = profileAbout.textContent;
-  const formValidProfile = new FormValidator(validationConfig, popupPlaceProfile);
-  formValidProfile.enableValidation();
-  const clearErrorProfile = new FormValidator(validationConfig, popupPlaceProfile);
-  clearErrorProfile.clearErrorMessage(popupPlaceProfile);
+  formValid.enableValidation(popupPlaceProfile);
+  clearError.clearErrorMessage(popupPlaceProfile);
   openPopup(popupPlaceProfile);
 }
 
@@ -94,19 +96,13 @@ function submitNewElement(evt){
   name: popupInputElementTitle.value,
   link: popupInputElementImage.value,
   }
-  
-  const newCard = new Card(data, '#element-template');
-  const newCardElement = newCard.generateCard();
-  
-  elementContainer.prepend(newCardElement);
+  elementContainer.prepend(cardElementObj(data));
   closePopup(popupPlaceElement);
   }
 
 function openPopupAddElement(){
-  const formValidElement = new FormValidator(validationConfig, popupPlaceElement);
-  formValidElement.enableValidation();
-  const clearErrorElement = new FormValidator(validationConfig, popupPlaceElement);
-  clearErrorElement.clearErrorMessage(popupPlaceElement);
+  formValid.enableValidation(popupPlaceElement);
+  clearError.clearErrorMessage(popupPlaceElement);
   openPopup(popupPlaceElement);
 }
 
