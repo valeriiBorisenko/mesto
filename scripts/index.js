@@ -1,6 +1,7 @@
-//import {} from './validate.js';
 import Card from './card.js';
 import {initialElements} from './initial-elements.js';
+import FormValidator from './validate.js';
+import {validationConfig} from './validate-config.js';
 
 /*profile*/ 
 const profileName = document.querySelector('.profile__title');
@@ -33,7 +34,7 @@ export const popupTitle = document.querySelector('.popup__title_place_image');
 
 const closeImageButton = document.querySelector('.popup__close-button_place_image');
 
-/*function*/
+/*Card OPP*/
 
 initialElements.forEach((initialElement) => {
   const card = new Card(initialElement, '#element-template');
@@ -41,6 +42,7 @@ initialElements.forEach((initialElement) => {
 
   elementContainer.append(cardElement);
 });
+
 
 
 /*popup*/
@@ -66,20 +68,20 @@ function submitProfile(evt){
   evt.preventDefault();
   profileName.textContent = popupInputProfileName.value;
   profileAbout.textContent = popupInputProfileAbout.value;
-  // resetForm(popupFormProfile)
   closePopup(popupPlaceProfile);
 }
 
 function openPopupProfile(){
   popupInputProfileName.value = profileName.textContent;
   popupInputProfileAbout.value = profileAbout.textContent;
- // checkSubmitButton(validationConfig);
+  const formValidProfile = new FormValidator(validationConfig, popupPlaceProfile);
+  formValidProfile.enableValidation();
+  const clearErrorProfile = new FormValidator(validationConfig, popupPlaceProfile);
+  clearErrorProfile.clearErrorMessage(popupPlaceProfile);
   openPopup(popupPlaceProfile);
 }
 
 function closePopupProfile(){
-  //resetForm(popupFormProfile)
- // clearErrorMessage(popupFormProfile, validationConfig);
   closePopup(popupPlaceProfile);
 }
 
@@ -98,17 +100,18 @@ function submitNewElement(evt){
   
   elementContainer.prepend(newCardElement);
   closePopup(popupPlaceElement);
- // resetForm(popupFormElement);
   }
 
 function openPopupAddElement(){
- // checkSubmitButton(validationConfig);
+  const formValidElement = new FormValidator(validationConfig, popupPlaceElement);
+  formValidElement.enableValidation();
+  const clearErrorElement = new FormValidator(validationConfig, popupPlaceElement);
+  clearErrorElement.clearErrorMessage(popupPlaceElement);
   openPopup(popupPlaceElement);
 }
 
  function closePopupAddElement(){
     resetForm(popupFormElement);
-   // clearErrorMessage(popupFormElement, validationConfig);
     closePopup(popupPlaceElement);
  } 
 
