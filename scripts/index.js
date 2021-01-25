@@ -40,8 +40,7 @@ initialElements.forEach((initialElement) => {
   elementContainer.append(cardElementObj(initialElement));
 });
 
-const formValid = new FormValidator(validationConfig);
-const clearError = new FormValidator(validationConfig);
+const formValidClear = new FormValidator(validationConfig);
 
 
 function cardElementObj(obj){
@@ -78,8 +77,8 @@ function submitProfile(evt){
 function openPopupProfile(){
   popupInputProfileName.value = profileName.textContent;
   popupInputProfileAbout.value = profileAbout.textContent;
-  formValid.enableValidation(popupPlaceProfile);
-  clearError.clearErrorMessage(popupPlaceProfile);
+  formValidClear.enableValidation(popupPlaceProfile);
+  formValidClear.clearErrorMessage(popupPlaceProfile);
   openPopup(popupPlaceProfile);
 }
 
@@ -101,8 +100,8 @@ function submitNewElement(evt){
   }
 
 function openPopupAddElement(){
-  formValid.enableValidation(popupPlaceElement);
-  clearError.clearErrorMessage(popupPlaceElement);
+  formValidClear.enableValidation(popupPlaceElement);
+  formValidClear.clearErrorMessage(popupPlaceElement);
   openPopup(popupPlaceElement);
 }
 
