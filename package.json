@@ -1,0 +1,19 @@
+{
+  "name": "mesto",
+  "version": "0.0.1",
+  "description": "Данный [проект](https://krotpeshehod.github.io/mesto/index.html \"Mesto\") похож на страницу в инстаграмме, где мы можем редактировать имя нашего героя и информацию о нем, добавлять карточки, оценивать фотогаллерею и удалять не понравившиеся.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Krotpeshehod/mesto.git"
+  },
+  "author": "Valeriy Borisenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Krotpeshehod/mesto/issues"
+  },
+  "homepage": "https://github.com/Krotpeshehod/mesto#readme"
+}
