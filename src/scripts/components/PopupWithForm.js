@@ -12,13 +12,13 @@ export default class PopupWithForm extends Popup {
 
     this._inputList = this._popupSelector.querySelectorAll('.popup__form-text');
     
-    const formValues = {};
+    const data = {};
 
     this._inputList.forEach(input => {
-      formValues[input.name] = input.value;
+      data[input.name] = input.value;
     });
 
-    return formValues;
+    return data;
     
   }
 

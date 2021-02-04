@@ -9,6 +9,10 @@ import {
   profileAbout,
   popupInputProfileName,
   popupInputProfileAbout,
+  popupPlaceElement,
+  closeElementButton,
+  popupInputElementTitle,
+  popupInputElementImage,
   closeProfileButton,
   editProfileButton,
   addElementButton,
@@ -30,11 +34,16 @@ function handleCardClick(evt) {
   openPopupImage.open(evt.src, evt.alt); 
 } 
 
+function cardElementObj(item){
+  const card = new Card(item, '#element-template', handleCardClick)
+  const cardElement = card.generateCard();
+  cardList.setItem(cardElement);
+}
+
 function openPopupProfile(){
   userInfo.getUserInfo(popupInputProfileName, popupInputProfileAbout)
   popupWithFormProfile.open();
   formValidAndClear.enableValidation(popupPlaceProfile);
-  formValidAndClear.clearErrorMessage(popupPlaceProfile);
 }
 
 const popupWithFormProfile = new PopupWithForm({
@@ -43,26 +52,41 @@ const popupWithFormProfile = new PopupWithForm({
     submitForm: () =>{
       userInfo.setUserInfo(popupInputProfileName, popupInputProfileAbout)
       popupWithFormProfile.close();
+      formValidAndClear.clearErrorMessage(popupPlaceProfile);
   }
 })
 
- const cardList = new Section({
+function openPopupElement(){
+  popupWithFormElement.open();
+  formValidAndClear.enableValidation(popupPlaceElement);
+}
+
+const cardList = new Section({
   items: initialElements,
-  renderer: (item) => {
-    const card = new Card(item, '#element-template', handleCardClick)
-    const cardElement = card.generateCard();
-    cardList.setItem(cardElement);
-  }
+  renderer: cardElementObj,
 }, elementContainer);
 
+const popupWithFormElement = new PopupWithForm({
+  popupSelector: popupPlaceElement,
+  closeButton: closeElementButton,
+  submitForm: (data) =>{
+    data = [{
+      name: popupInputElementTitle.value,
+      link: popupInputElementImage.value,
+    }]
+  const newCard = new Section({
+      items: data,
+      renderer: cardElementObj
+    }, elementContainer)
+  newCard.renderItems();
+  popupWithFormElement.close()
+  formValidAndClear.clearErrorMessage(popupPlaceElement);
+  }
+})
 
 cardList.renderItems();
 popupWithFormProfile.setEventListeners();
-
-/*handler*/
+popupWithFormElement.setEventListeners();
 
 editProfileButton.addEventListener('click', openPopupProfile);
-//addElementButton.addEventListener('click', openPopupAddElement);
-
-//.addEventListener('click', );
-//closeElementButton.addEventListener('click', closePopupAddElement);
+addElementButton.addEventListener('click', openPopupElement);
