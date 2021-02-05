@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/Krotpeshehod/mesto/issues"
   },
-  "homepage": "https://github.com/Krotpeshehod/mesto#readme"
+  "homepage": "https://github.com/Krotpeshehod/mesto#readme",
+  "devDependencies": {
+    "webpack": "^5.20.2",
+    "webpack-cli": "^4.5.0"
+  }
 }
