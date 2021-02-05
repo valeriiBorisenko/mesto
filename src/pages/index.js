@@ -1,3 +1,5 @@
+import '../pages/index.css'
+
 import {
   initialElements, 
   validationConfig,
@@ -31,7 +33,7 @@ const userInfo = new UserInfo (profileName, profileAbout)
 
 function handleCardClick(evt) {
   const openPopupImage = new PopupWithImage(popupPlaceImage, closeImageButton)
-  openPopupImage.open(evt.src, evt.alt); 
+  openPopupImage.open(evt.src, evt.alt);
 } 
 
 function cardElementObj(item){
