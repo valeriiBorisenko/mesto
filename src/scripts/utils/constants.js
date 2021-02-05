@@ -26,30 +26,38 @@ export const closeElementButton = document.querySelector('.popup__close-button_p
 export const popupPlaceImage = document.querySelector('.popup_place_image');
 export const closeImageButton = document.querySelector('.popup__close-button_place_image');
 
+
+const van = new URL('../../image/elements/van.jpeg', import.meta.url)
+const morning = new URL('../../image/elements/morning.jpeg', import.meta.url)
+const coffe = new URL('../../image/elements/coffee.jpeg', import.meta.url)
+const viewFromVan = new URL('../../image/elements/view_from_van.jpeg', import.meta.url)
+const boat = new URL('../../image/elements/boat.jpeg', import.meta.url)
+const roadTrip = new URL('../../image/elements/road_trip.jpeg', import.meta.url)
+
 export const initialElements = [
   {
     name: 'Поездка на море с досками',
-    link: './image/elements/van.jpeg'
+    link: van
   },
   {
     name: 'Доброе утро',
-    link: './image/elements/morning.jpeg'
+    link: morning
   },
   {
     name: 'Свежий кофе у костра',
-    link: './image/elements/coffee.jpeg'
+    link: coffe
   },
   {
     name: 'Вид из машины',
-    link: './image/elements/view_from_van.jpeg'
+    link: viewFromVan
   },
   {
     name: 'Горное озеро',
-    link: './image/elements/boat.jpeg'
+    link: boat
   },
   {
     name: 'Подготовка к путешествию',
-    link: './image/elements/road_trip.jpeg'
+    link: roadTrip
   }
 ];
   

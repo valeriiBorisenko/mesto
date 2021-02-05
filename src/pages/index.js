@@ -1,3 +1,5 @@
+import '../pages/index.css'
+
 import {
   initialElements, 
   validationConfig,
@@ -31,7 +33,7 @@ const userInfo = new UserInfo (profileName, profileAbout)
 
 function handleCardClick(evt) {
   const openPopupImage = new PopupWithImage(popupPlaceImage, closeImageButton)
-  openPopupImage.open(evt.src, evt.alt); 
+  openPopupImage.open(evt.src, evt.alt);
 } 
 
 function cardElementObj(item){
@@ -44,6 +46,7 @@ function openPopupProfile(){
   userInfo.getUserInfo(popupInputProfileName, popupInputProfileAbout)
   popupWithFormProfile.open();
   formValidAndClear.enableValidation(popupPlaceProfile);
+  formValidAndClear.clearErrorMessage(popupPlaceProfile);
 }
 
 const popupWithFormProfile = new PopupWithForm({
@@ -52,13 +55,13 @@ const popupWithFormProfile = new PopupWithForm({
     submitForm: () =>{
       userInfo.setUserInfo(popupInputProfileName, popupInputProfileAbout)
       popupWithFormProfile.close();
-      formValidAndClear.clearErrorMessage(popupPlaceProfile);
   }
 })
 
 function openPopupElement(){
   popupWithFormElement.open();
   formValidAndClear.enableValidation(popupPlaceElement);
+  formValidAndClear.clearErrorMessage(popupPlaceElement);
 }
 
 const cardList = new Section({
@@ -80,7 +83,6 @@ const popupWithFormElement = new PopupWithForm({
     }, elementContainer)
   newCard.renderItems();
   popupWithFormElement.close()
-  formValidAndClear.clearErrorMessage(popupPlaceElement);
   }
 })
 
