@@ -11,13 +11,15 @@ import {
   profileAbout,
   popupInputProfileName,
   popupInputProfileAbout,
-  popupPlaceElement,
-  closeElementButton,
   popupInputElementTitle,
   popupInputElementImage,
+  popupPlaceElement,
+  closeElementButton,
   closeProfileButton,
   editProfileButton,
   addElementButton,
+  popupFormProfile,
+  popupFormElement,
 } from '../scripts/utils/constants.js'
 import Card from '../scripts/components/Card.js';
 import Section from '../scripts/components/Section.js';
@@ -26,13 +28,19 @@ import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 
-const formValidAndClear = new FormValidator(validationConfig);
+const profileValidAndClear = new FormValidator(validationConfig, popupFormProfile);
+profileValidAndClear.enableValidation();
+const cardValidAndClear = new FormValidator(validationConfig, popupFormElement);
+cardValidAndClear.enableValidation();
+
+const openPopupImage = new PopupWithImage(popupPlaceImage, closeImageButton)
+openPopupImage.setEventListeners()
+
 const userInfo = new UserInfo (profileName, profileAbout)
 
 /*Function*/
 
 function handleCardClick(evt) {
-  const openPopupImage = new PopupWithImage(popupPlaceImage, closeImageButton)
   openPopupImage.open(evt.src, evt.alt);
 } 
 
@@ -43,25 +51,24 @@ function cardElementObj(item){
 }
 
 function openPopupProfile(){
-  userInfo.getUserInfo(popupInputProfileName, popupInputProfileAbout)
+  popupInputProfileName.value = userInfo.getUserInfo().hero
+  popupInputProfileAbout.value = userInfo.getUserInfo().aboutHero
   popupWithFormProfile.open();
-  formValidAndClear.enableValidation(popupPlaceProfile);
-  formValidAndClear.clearErrorMessage(popupPlaceProfile);
+  profileValidAndClear.clearErrorMessage()
 }
 
 const popupWithFormProfile = new PopupWithForm({
     popupSelector: popupPlaceProfile,
     closeButton: closeProfileButton,
-    submitForm: () =>{
-      userInfo.setUserInfo(popupInputProfileName, popupInputProfileAbout)
+    submitForm: (data) =>{
+      userInfo.setUserInfo(data['place_name'], data['place_about'])
       popupWithFormProfile.close();
   }
 })
 
 function openPopupElement(){
   popupWithFormElement.open();
-  formValidAndClear.enableValidation(popupPlaceElement);
-  formValidAndClear.clearErrorMessage(popupPlaceElement);
+    cardValidAndClear.clearErrorMessage()
 }
 
 const cardList = new Section({
@@ -73,15 +80,11 @@ const popupWithFormElement = new PopupWithForm({
   popupSelector: popupPlaceElement,
   closeButton: closeElementButton,
   submitForm: (data) =>{
-    data = [{
+    data = {
       name: popupInputElementTitle.value,
       link: popupInputElementImage.value,
-    }]
-  const newCard = new Section({
-      items: data,
-      renderer: cardElementObj
-    }, elementContainer)
-  newCard.renderItems();
+    }
+    cardElementObj(data)
   popupWithFormElement.close()
   }
 })

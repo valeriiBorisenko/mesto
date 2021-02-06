@@ -48,12 +48,12 @@
         aria-label="закрыть"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup__form popup__form_place_profile" name="edit_profile" novalidate>
-        <input class="popup__form-text popup__form-text_type_profile-name" type="text" id="error_place_name"
-          name="error_place_name" required placeholder="Имя" minlength="2" maxlength="40" autocomplete="off">
-        <span class="error error_place_name-error"></span>
-        <input class="popup__form-text popup__form-text_type_profile-about" type="text" id="error_place_about"
-          name="error_place_about" required placeholder="О себе" minlength="2" maxlength="200" autocomplete="off">
-        <span class="error error_place_about-error"></span>
+        <input class="popup__form-text popup__form-text_type_profile-name" type="text" id="place_name" name="place_name"
+          required placeholder="Имя" minlength="2" maxlength="40" autocomplete="off">
+        <span class="error error_place_name-error" id="place_name-error"></span>
+        <input class="popup__form-text popup__form-text_type_profile-about" type="text" id="place_about"
+          name="place_about" required placeholder="О себе" minlength="2" maxlength="200" autocomplete="off">
+        <span class="error error_place_about-error" id="place_about-error"></span>
         <button class="popup__save-button" type="submit">Сохранить</button>
       </form>
     </div>
@@ -65,12 +65,12 @@
         aria-label="закрыть"></button>
       <h2 class="popup__title popup__title_place_element">Новое место</h2>
       <form class="popup__form popup__form_place_element" name="add_profile" novalidate>
-        <input class="popup__form-text popup__form-text_type_element-name" type="text" id="error_place_image-name"
-          name="error_place_image-name" required placeholder="Название" minlength="2" maxlength="30" autocomplete="off">
-        <span class="error error_place_image-name-error"></span>
-        <input class="popup__form-text popup__form-text_type_image" type="url" id="error_place_image"
-          name="error_place_image" required placeholder="Ссылка на картинку" autocomplete="off">
-        <span class="error error_place_image-error"></span>
+        <input class="popup__form-text popup__form-text_type_element-name" type="text" id="place_image-name"
+          name="place_image-name" required placeholder="Название" minlength="2" maxlength="30" autocomplete="off">
+        <span class="error error_place_image-name-error" id="place_image-name-error"></span>
+        <input class="popup__form-text popup__form-text_type_image" type="url" id="place_image" name="place_image"
+          required placeholder="Ссылка на картинку" autocomplete="off">
+        <span class="error error_place_image-error" id="place_image-error"></span>
         <button class="popup__save-button" type="submit">Создать</button>
       </form>
     </div>

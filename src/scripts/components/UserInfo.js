@@ -4,14 +4,16 @@ export default class UserInfo{
     this._aboutHero = aboutHero
   }
 
-  getUserInfo(heroInput, aboutHeroInput) {
-    heroInput.value = this._hero.textContent;
-    aboutHeroInput.value = this._aboutHero.textContent;
-
+  getUserInfo() {
+    const data = {
+      hero: this._hero.textContent,
+      aboutHero: this._aboutHero.textContent,
+    }
+    return data;
   }
 
-  setUserInfo (heroInput, aboutHeroInput){
-    this._hero.textContent = heroInput.value;
-    this._aboutHero.textContent = aboutHeroInput.value;
+  setUserInfo (hero, aboutHero){
+    this._hero.textContent = hero;
+    this._aboutHero.textContent = aboutHero;
   };
 }

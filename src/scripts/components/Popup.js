@@ -6,8 +6,6 @@ export default class Popup{
   
   open(){
     this._popupSelector.classList.add('popup_visible');
-    this.setEventListeners()
-
     document.addEventListener('keyup', this._handleEscClose);
     document.addEventListener('click', this._clickOutsidePopup);
   }
