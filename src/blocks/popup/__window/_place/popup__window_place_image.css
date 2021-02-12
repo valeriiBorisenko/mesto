@@ -4,5 +4,8 @@
   background-color: unset;
   border-radius: 0;
   text-align: left;
+  width: auto;
+  
+  margin: 0;
   padding: 0;
 }

@@ -5,7 +5,6 @@ import {
   validationConfig,
   elementContainer, 
   popupPlaceImage, 
-  closeImageButton,
   popupPlaceProfile, 
   profileName,
   profileAbout,
@@ -14,12 +13,14 @@ import {
   popupInputElementTitle,
   popupInputElementImage,
   popupPlaceElement,
-  closeElementButton,
-  closeProfileButton,
-  editProfileButton,
+  editButtonAboutProfile,
   addElementButton,
   popupFormProfile,
   popupFormElement,
+  popupFormPlaceAvatar,
+  editButtonAvatar,
+  popupPlaceAvatar,
+  profileAvatar
 } from '../scripts/utils/constants.js'
 import Card from '../scripts/components/Card.js';
 import Section from '../scripts/components/Section.js';
@@ -27,25 +28,38 @@ import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import UserInfo from '../scripts/components/UserInfo.js';
+import Popup from '../scripts/components/Popup';
 
 const profileValidAndClear = new FormValidator(validationConfig, popupFormProfile);
 profileValidAndClear.enableValidation();
 const cardValidAndClear = new FormValidator(validationConfig, popupFormElement);
 cardValidAndClear.enableValidation();
+const avatarValidAndClear = new FormValidator(validationConfig, popupFormPlaceAvatar);
+avatarValidAndClear.enableValidation();
 
-const openPopupImage = new PopupWithImage(popupPlaceImage, closeImageButton)
+const openPopupImage = new PopupWithImage(popupPlaceImage)
 openPopupImage.setEventListeners()
 
 const userInfo = new UserInfo (profileName, profileAbout)
+
 
 /*Function*/
 
 function handleCardClick(evt) {
   openPopupImage.open(evt.src, evt.alt);
-} 
+}
+
+function deleteElement (evt){
+  const openPopupDeleteCard = new PopupWithForm()
+  if (evt.target.closest('.element').remove()){
+
+  }
+    
+  };
+
 
 function cardElementObj(item){
-  const card = new Card(item, '#element-template', handleCardClick)
+  const card = new Card(item, '#element-template', handleCardClick, deleteElement)
   const cardElement = card.generateCard();
   cardList.setItem(cardElement);
 }
@@ -59,9 +73,8 @@ function openPopupProfile(){
 
 const popupWithFormProfile = new PopupWithForm({
     popupSelector: popupPlaceProfile,
-    closeButton: closeProfileButton,
     submitForm: (data) =>{
-      userInfo.setUserInfo(data['place_name'], data['place_about'])
+      userInfo.setUserInfo(data['place_name'], data['place_about'], '')
       popupWithFormProfile.close();
   }
 })
@@ -78,7 +91,6 @@ const cardList = new Section({
 
 const popupWithFormElement = new PopupWithForm({
   popupSelector: popupPlaceElement,
-  closeButton: closeElementButton,
   submitForm: (data) =>{
     data = {
       name: popupInputElementTitle.value,
@@ -89,9 +101,25 @@ const popupWithFormElement = new PopupWithForm({
   }
 })
 
+function openPopupAvatar(){
+  popupWithFormAvatar.open();
+  avatarValidAndClear.clearErrorMessage()
+}
+
+  const popupWithFormAvatar = new PopupWithForm({
+    popupSelector: popupPlaceAvatar,
+    submitForm: (data) =>{
+      profileAvatar.src = data['place_avatar']
+      popupWithFormAvatar.close();
+  }
+})
+
 cardList.renderItems();
 popupWithFormProfile.setEventListeners();
 popupWithFormElement.setEventListeners();
+popupWithFormAvatar.setEventListeners();
 
-editProfileButton.addEventListener('click', openPopupProfile);
+
+editButtonAboutProfile.addEventListener('click', openPopupProfile);
 addElementButton.addEventListener('click', openPopupElement);
+editButtonAvatar.addEventListener('click', openPopupAvatar)

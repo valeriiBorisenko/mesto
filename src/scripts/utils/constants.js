@@ -7,8 +7,8 @@ export const popupFormProfile = document.querySelector('.popup__form_place_profi
 export const popupInputProfileName = document.querySelector('.popup__form-text_type_profile-name');
 export const popupInputProfileAbout = document.querySelector('.popup__form-text_type_profile-about');
 
-export const editProfileButton = document.querySelector('.profile__edit-button');
-export const closeProfileButton = document.querySelector('.popup__close-button_place_profile');
+export const editButtonAboutProfile = document.querySelector('.profile__edit-button_place_about-profile');
+
 
 /*element*/
 export const elementContainer = document.querySelector('.elements__container');
@@ -19,12 +19,20 @@ export const popupInputElementTitle = document.querySelector('.popup__form-text_
 export const popupInputElementImage = document.querySelector('.popup__form-text_type_image');
 
 export const addElementButton = document.querySelector('.profile__add-button');
-export const closeElementButton = document.querySelector('.popup__close-button_place_element');
+
+/*avatar*/
+
+export const profileAvatar = document.querySelector('.profile__avatar')
+export const popupPlaceAvatar = document.querySelector('.popup_place_avatar');
+export const editButtonAvatar = document.querySelector('.profile__edit-button_place_avatar');
+export const popupFormPlaceAvatar = document.querySelector('.popup__form_place_avatar');
+export const popupFormInputPlaceAvatar = document.querySelector('.popup__form-text_type_avatar');
+
 
 /*image*/
 
 export const popupPlaceImage = document.querySelector('.popup_place_image');
-export const closeImageButton = document.querySelector('.popup__close-button_place_image');
+
 
 
 const van = new URL('../../image/elements/van.jpeg', import.meta.url)

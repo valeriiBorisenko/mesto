@@ -1,10 +1,11 @@
 export default class Card{
 
-  constructor (data, cardSelector, handleCardClick){
+  constructor (data, cardSelector, handleCardClick, deleteElement){
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleOpenImage = handleCardClick;
+    this._deleteElement = deleteElement;
   }
 
   _getTemplate() {
@@ -31,10 +32,6 @@ export default class Card{
     
     return this._element;
   }
-
-  _deleteElement (evt){
-    evt.target.closest('.element').remove();
-  };
 
   _likeElement (evt) {
     evt.target.classList.toggle('element__button-like_active');

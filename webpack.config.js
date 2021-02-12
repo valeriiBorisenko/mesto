@@ -19,6 +19,7 @@ module.exports = {
     port: 8080,
     open: true
   },
+  devtool: 'inline-source-map',
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
