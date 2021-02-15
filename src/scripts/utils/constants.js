@@ -34,6 +34,11 @@ export const popupFormInputPlaceAvatar = document.querySelector('.popup__form-te
 export const popupPlaceImage = document.querySelector('.popup_place_image');
 
 
+/*delete*/
+
+export const popupPlaceDeleteCard = document.querySelector('.popup_place_delete-card')
+
+
 
 const van = new URL('../../image/elements/van.jpeg', import.meta.url)
 const morning = new URL('../../image/elements/morning.jpeg', import.meta.url)

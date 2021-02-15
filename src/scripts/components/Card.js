@@ -1,11 +1,12 @@
 export default class Card{
 
-  constructor (data, cardSelector, handleCardClick, deleteElement){
+  constructor (data, cardSelector, handleCardClick){
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleOpenImage = handleCardClick;
-    this._deleteElement = deleteElement;
+    this._element = this._getTemplate();
+    this._likeButton = this._element.querySelector('.element__button-like')
   }
 
   _getTemplate() {
@@ -19,7 +20,6 @@ export default class Card{
   }
 
   generateCard(){
-    this._element = this._getTemplate();
 
     const cardImage = this._element.querySelector('.element__image')
     const cardImageTitle = this._element.querySelector('.element__title')
@@ -35,19 +35,33 @@ export default class Card{
 
   _likeElement (evt) {
     evt.target.classList.toggle('element__button-like_active');
+    
+    const likeCounter = this._element.querySelector('#like-counter')
+    if(this._likeButton.classList.contains('element__button-like_active')){
+
+      likeCounter.innerHTML = (innerHTML | 0) +1
+    }
+    else{
+      likeCounter.innerHTML -= 1
+    }
+  }
+
+  _deleteElement (evt){
+    evt.target.closest('.element').remove();
   };
 
   _setEventListeners = () => {
 
     this._element.querySelector('.element__image').addEventListener('click', (evt) => { 
-      this._handleOpenImage(evt.target); 
+      this._handleOpenImage(evt.target);
     }) 
 
     this._element.querySelector('.element__button-delete').addEventListener('click', (evt)=>{
-      evt.stopPropagation();
+      evt.stopPropagation(evt);
       this._deleteElement(evt)
-    })
-    this._element.querySelector('.element__button-like').addEventListener('click', (evt)=>{
+      })
+
+    this._likeButton.addEventListener('click', (evt)=>{
       evt.stopPropagation();
       this._likeElement(evt)
     });

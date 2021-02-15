@@ -20,12 +20,14 @@
       <div class="profile__content">
         <div class="profile__avatar-container">
           <img class="profile__avatar" src="<%=require('./image/profile/avatar.jpg')%>" alt="аватарка пользователя">
-          <button class="profile__edit-button profile__edit-button_place_avatar" aria-label="редактировать аватар" type="button"></button>
+          <button class="profile__edit-button profile__edit-button_place_avatar" aria-label="редактировать аватар"
+            type="button"></button>
         </div>
         <div class="profile__container">
           <div class="profile__title-container">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
-            <button class="link-opacity profile__edit-button profile__edit-button_place_about-profile" aria-label="редактировать профиль" type="button">
+            <button class="link-opacity profile__edit-button profile__edit-button_place_about-profile"
+              aria-label="редактировать профиль" type="button">
             </button>
           </div>
           <p class="profile__subtitle">Исследователь океана</p>
@@ -64,8 +66,7 @@
 
   <section class="popup popup_place_element">
     <div class="popup__window popup__window_place_element">
-      <button class="link-opacity popup__close-button" type="button"
-        aria-label="закрыть"></button>
+      <button class="link-opacity popup__close-button" type="button" aria-label="закрыть"></button>
       <h2 class="popup__title popup__title_place_element">Новое место</h2>
       <form class="popup__form popup__form_place_element" name="add_profile" novalidate>
         <input class="popup__form-text popup__form-text_type_element-name" type="text" id="place_image-name"
@@ -81,8 +82,7 @@
 
   <section class="popup popup_place_image">
     <figure class="popup__window popup__window_place_image">
-      <button class="link-opacity popup__close-button" type="button"
-        aria-label="закрыть"></button>
+      <button class="link-opacity popup__close-button" type="button" aria-label="закрыть"></button>
       <img class="popup__image" src="#" alt="#">
       <figcaption class="popup__title popup__title_place_image"></figcaption>
     </figure>
@@ -90,8 +90,7 @@
 
   <section class="popup popup_place_avatar">
     <div class="popup__window popup__window_place_avatar">
-      <button class="link-opacity popup__close-button" type="button"
-        aria-label="закрыть"></button>
+      <button class="link-opacity popup__close-button" type="button" aria-label="закрыть"></button>
       <h2 class="popup__title">Обновить аватар</h2>
       <form class="popup__form popup__form_place_avatar" name="edit_avatar" novalidate>
         <input class="popup__form-text popup__form-text_type_avatar" type="url" id="place_avatar" name="place_avatar"
@@ -102,13 +101,12 @@
     </div>
   </section>
 
-    <section class="popup popup_place_delete-card">
-    <figure class="popup__window popup__window_place_delete-card">
-      <button class="link-opacity popup__close-button" type="button"
-        aria-label="закрыть"></button>
+  <section class="popup popup_place_delete-card">
+    <div class="popup__window popup__window_place_delete-card">
+      <button class="link-opacity popup__close-button" type="button" aria-label="закрыть"></button>
       <h2 class="popup__title">Вы уверены?</h2>
-      <button class="popup__save-button" type="submit">Да</button>
-    </figure>
+      <button class="popup__save-button popup__save-button_place" type="button">Да</button>
+    </div>
   </section>
 
   <template id="element-template">
@@ -119,7 +117,7 @@
         <h2 class="element__title"></h2>
         <div class="element__container-like">
           <button class="element__button-like" type="button" aria-label="нравится"></button>
-          <span class="element__like-number" id="like-number">0</span>
+          <span class="element__like-counter" id="like-counter">0</span>
         </div>
       </div>
     </li>

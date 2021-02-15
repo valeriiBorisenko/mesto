@@ -1,4 +1,4 @@
-.element__like-number{
+.element__like-counter {
   width: 10px;
   height: 13px;
 
@@ -7,4 +7,5 @@
   line-height: 16px;
   text-align: center;
   color: black;
+  display: block;
 }

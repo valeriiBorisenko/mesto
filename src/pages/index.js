@@ -20,7 +20,8 @@ import {
   popupFormPlaceAvatar,
   editButtonAvatar,
   popupPlaceAvatar,
-  profileAvatar
+  profileAvatar,
+  popupPlaceDeleteCard,
 } from '../scripts/utils/constants.js'
 import Card from '../scripts/components/Card.js';
 import Section from '../scripts/components/Section.js';
@@ -40,6 +41,9 @@ avatarValidAndClear.enableValidation();
 const openPopupImage = new PopupWithImage(popupPlaceImage)
 openPopupImage.setEventListeners()
 
+const popupDeleteCard = new Popup(popupPlaceDeleteCard)
+popupDeleteCard.setEventListeners()
+
 const userInfo = new UserInfo (profileName, profileAbout)
 
 
@@ -49,17 +53,12 @@ function handleCardClick(evt) {
   openPopupImage.open(evt.src, evt.alt);
 }
 
-function deleteElement (evt){
-  const openPopupDeleteCard = new PopupWithForm()
-  if (evt.target.closest('.element').remove()){
-
-  }
-    
-  };
-
+function handleOpenDeleteCard(){
+    popupDeleteCard.open()
+}
 
 function cardElementObj(item){
-  const card = new Card(item, '#element-template', handleCardClick, deleteElement)
+  const card = new Card(item, '#element-template', handleCardClick, handleOpenDeleteCard)
   const cardElement = card.generateCard();
   cardList.setItem(cardElement);
 }
@@ -74,7 +73,7 @@ function openPopupProfile(){
 const popupWithFormProfile = new PopupWithForm({
     popupSelector: popupPlaceProfile,
     submitForm: (data) =>{
-      userInfo.setUserInfo(data['place_name'], data['place_about'], '')
+      userInfo.setUserInfo(data['place_name'], data['place_about'])
       popupWithFormProfile.close();
   }
 })
@@ -121,5 +120,5 @@ popupWithFormAvatar.setEventListeners();
 
 
 editButtonAboutProfile.addEventListener('click', openPopupProfile);
-addElementButton.addEventListener('click', openPopupElement);
 editButtonAvatar.addEventListener('click', openPopupAvatar)
+addElementButton.addEventListener('click', openPopupElement);
