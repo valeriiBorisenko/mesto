@@ -22,6 +22,7 @@ import {
   popupPlaceAvatar,
   profileAvatar,
   popupPlaceDeleteCard,
+  buttonDeleteCard,
 } from '../scripts/utils/constants.js'
 import Card from '../scripts/components/Card.js';
 import Section from '../scripts/components/Section.js';
@@ -29,7 +30,7 @@ import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import UserInfo from '../scripts/components/UserInfo.js';
-import Popup from '../scripts/components/Popup';
+import Api from '../scripts/components/Api.js'
 
 const profileValidAndClear = new FormValidator(validationConfig, popupFormProfile);
 profileValidAndClear.enableValidation();
@@ -41,24 +42,36 @@ avatarValidAndClear.enableValidation();
 const openPopupImage = new PopupWithImage(popupPlaceImage)
 openPopupImage.setEventListeners()
 
-const popupDeleteCard = new Popup(popupPlaceDeleteCard)
-popupDeleteCard.setEventListeners()
-
 const userInfo = new UserInfo (profileName, profileAbout)
 
 
 /*Function*/
 
+const api = new Api ({
+  url: "https://mesto.nomoreparties.co/v1/cohort-20/",
+  headers: {
+    "content-type": "application/json",
+    "authorization": "a4e2a7e9-e2ca-4fbc-8dff-1e2c4b21f19a"
+  }
+})
+
+const task = api._getAllCards();
+
+task.then((data)=>{
+  const cardList = new Section({
+  items: data,
+  renderer: cardElementObj,
+  }, elementContainer);
+  cardList.renderItems();
+})
+
+
 function handleCardClick(evt) {
   openPopupImage.open(evt.src, evt.alt);
 }
 
-function handleOpenDeleteCard(){
-    popupDeleteCard.open()
-}
-
 function cardElementObj(item){
-  const card = new Card(item, '#element-template', handleCardClick, handleOpenDeleteCard)
+  const card = new Card(item, '#element-template', handleCardClick)
   const cardElement = card.generateCard();
   cardList.setItem(cardElement);
 }
@@ -83,10 +96,6 @@ function openPopupElement(){
     cardValidAndClear.clearErrorMessage()
 }
 
-const cardList = new Section({
-  items: initialElements,
-  renderer: cardElementObj,
-}, elementContainer);
 
 const popupWithFormElement = new PopupWithForm({
   popupSelector: popupPlaceElement,
@@ -113,7 +122,7 @@ function openPopupAvatar(){
   }
 })
 
-cardList.renderItems();
+
 popupWithFormProfile.setEventListeners();
 popupWithFormElement.setEventListeners();
 popupWithFormAvatar.setEventListeners();

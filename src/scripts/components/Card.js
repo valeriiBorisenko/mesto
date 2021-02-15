@@ -39,7 +39,7 @@ export default class Card{
     const likeCounter = this._element.querySelector('#like-counter')
     if(this._likeButton.classList.contains('element__button-like_active')){
 
-      likeCounter.innerHTML = (innerHTML | 0) +1
+      likeCounter.innerHTML = (likeCounter.innerHTML | 0) +1
     }
     else{
       likeCounter.innerHTML -= 1
