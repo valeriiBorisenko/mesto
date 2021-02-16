@@ -42,7 +42,7 @@ avatarValidAndClear.enableValidation();
 const openPopupImage = new PopupWithImage(popupPlaceImage)
 openPopupImage.setEventListeners()
 
-const userInfo = new UserInfo (profileName, profileAbout)
+const userInfo = new UserInfo (profileName, profileAbout, profileAvatar)
 
 const cardList = new Section(cardElementObj, elementContainer);
 
@@ -73,8 +73,13 @@ function cardElementObj(item){
 }
 
 function openPopupProfile(){
-  popupInputProfileName.value = userInfo.getUserInfo().name
-  popupInputProfileAbout.value = userInfo.getUserInfo().about
+  api
+  .getUserData()
+  .then((res) =>{
+    userInfo.getUserInfo(res)
+  })
+  .catch((err) => {console.log(err)});
+
   popupWithFormProfile.open();
   profileValidAndClear.clearErrorMessage()
 }
@@ -82,7 +87,7 @@ function openPopupProfile(){
 const popupWithFormProfile = new PopupWithForm({
     popupSelector: popupPlaceProfile,
     submitForm: (data) =>{
-      userInfo.setUserInfo(data['place_name'], data['place_about'])
+      userInfo.setUserInfo(data, data)
       popupWithFormProfile.close();
   }
 })
