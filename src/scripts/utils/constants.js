@@ -33,47 +33,11 @@ export const popupFormInputPlaceAvatar = document.querySelector('.popup__form-te
 
 export const popupPlaceImage = document.querySelector('.popup_place_image');
 
-
-
 /*delete*/
 
 export const popupPlaceDeleteCard = document.querySelector('.popup_place_delete-card')
 export const buttonDeleteCard = document.querySelector('.popup__save-button_place')
 
-const van = new URL('../../image/elements/van.jpeg', import.meta.url)
-const morning = new URL('../../image/elements/morning.jpeg', import.meta.url)
-const coffe = new URL('../../image/elements/coffee.jpeg', import.meta.url)
-const viewFromVan = new URL('../../image/elements/view_from_van.jpeg', import.meta.url)
-const boat = new URL('../../image/elements/boat.jpeg', import.meta.url)
-const roadTrip = new URL('../../image/elements/road_trip.jpeg', import.meta.url)
-
-export const initialElements = [
-  {
-    name: 'Поездка на море с досками',
-    link: van
-  },
-  {
-    name: 'Доброе утро',
-    link: morning
-  },
-  {
-    name: 'Свежий кофе у костра',
-    link: coffe
-  },
-  {
-    name: 'Вид из машины',
-    link: viewFromVan
-  },
-  {
-    name: 'Горное озеро',
-    link: boat
-  },
-  {
-    name: 'Подготовка к путешествию',
-    link: roadTrip
-  }
-];
-  
 export const validationConfig = {
 
   inputSelector: '.popup__form-text',

@@ -44,6 +44,7 @@ openPopupImage.setEventListeners()
 
 const userInfo = new UserInfo (profileName, profileAbout)
 
+const cardList = new Section(cardElementObj, elementContainer);
 
 /*Function*/
 
@@ -55,30 +56,25 @@ const api = new Api ({
   }
 })
 
-const task = api._getAllCards();
-
-task.then((data)=>{
-  const cardList = new Section({
-  items: data,
-  renderer: cardElementObj,
-  }, elementContainer);
-  cardList.renderItems();
+api
+.getAllCards()
+.then((res) =>{cardList.renderItems(res)})
+.catch((err) => {console.log(err);
 })
-
 
 function handleCardClick(evt) {
   openPopupImage.open(evt.src, evt.alt);
 }
 
 function cardElementObj(item){
-  const card = new Card(item, '#element-template', handleCardClick)
+  const card = new Card(item, '#element-template', handleCardClick, api)
   const cardElement = card.generateCard();
   cardList.setItem(cardElement);
 }
 
 function openPopupProfile(){
-  popupInputProfileName.value = userInfo.getUserInfo().hero
-  popupInputProfileAbout.value = userInfo.getUserInfo().aboutHero
+  popupInputProfileName.value = userInfo.getUserInfo().name
+  popupInputProfileAbout.value = userInfo.getUserInfo().about
   popupWithFormProfile.open();
   profileValidAndClear.clearErrorMessage()
 }
@@ -100,10 +96,11 @@ function openPopupElement(){
 const popupWithFormElement = new PopupWithForm({
   popupSelector: popupPlaceElement,
   submitForm: (data) =>{
-    data = {
+    api.addNewCard
+    ({
       name: popupInputElementTitle.value,
       link: popupInputElementImage.value,
-    }
+    })
     cardElementObj(data)
   popupWithFormElement.close()
   }

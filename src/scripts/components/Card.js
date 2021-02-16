@@ -1,10 +1,15 @@
 export default class Card{
 
-  constructor (data, cardSelector, handleCardClick){
+  constructor (data, cardSelector, handleCardClick, api){
     this._name = data.name;
     this._link = data.link;
+    this._userId = data._id;
+    this._likes = data.likes;
+    this._ownerId = data.owner._id
     this._cardSelector = cardSelector;
     this._handleOpenImage = handleCardClick;
+
+    this._api = api
     this._element = this._getTemplate();
     this._likeButton = this._element.querySelector('.element__button-like')
   }
@@ -46,8 +51,11 @@ export default class Card{
     }
   }
 
-  _deleteElement (evt){
-    evt.target.closest('.element').remove();
+  _deleteElement = () =>{
+    this._api
+    .removeCard(this._ownerId)
+    .then((evt)=>{evt.target.closest('.element').remove();})
+    .catch((err) => {console.log(err)})
   };
 
   _setEventListeners = () => {
