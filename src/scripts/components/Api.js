@@ -21,13 +21,21 @@ export default class Api{
 
   patchUserData(data){
     return fetch(`${this._url}users/me`, {
-      method: "GET",
+      method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
         about: data.about,
-        avatar: data.avatar
       }),
+    })
+    .then(onError)
+  }
+
+  patchUserAvatar(data){
+    return fetch(`${this._url}users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify(data),
     })
     .then(onError)
   }
@@ -60,19 +68,19 @@ export default class Api{
     .then(onError)
   }
 
-  addLike(data){
-    return fetch(`${this._url}cards`, {
+  addLike(likes){
+    return fetch(`${this._url}cards/likes/${id}`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        likes: data.length
+        likes: likes.length
       }),
     })
     .then(onError)
   }
 
   removeLike(id){
-    return fetch(`${this._url}${id}`, {
+    return fetch(`${this._url}cards/likes/${id}`, {
       method: "DELETE",
       headers: this._headers,
     })
