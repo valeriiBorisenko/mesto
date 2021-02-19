@@ -12,17 +12,11 @@
   margin: 0px 19px;
 
   width: 430px;
-  min-height: 322px;
+  min-height: 181px;
 }
-
-
-
-
-
 
 @media screen and (min-width: 768px) {
   .popup__window {
-    min-height: 330px;
     margin: auto;
     padding: 34px 36px 37px;
   }

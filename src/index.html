@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./pages/index.css">
-  <link rel="shortcut icon" href="./image/icon/favicon.ico">
   <title>Mesto</title>
 </head>
 
@@ -19,18 +18,18 @@
     <section class="profile">
       <div class="profile__content">
         <div class="profile__avatar-container">
-          <img class="profile__avatar" src="<%=require('./image/profile/avatar.jpg')%>" alt="аватарка пользователя">
+          <img class="profile__avatar" src="#" alt="аватарка пользователя">
           <button class="profile__edit-button profile__edit-button_place_avatar" aria-label="редактировать аватар"
             type="button"></button>
         </div>
         <div class="profile__container">
           <div class="profile__title-container">
-            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <h1 class="profile__title">Имя автора</h1>
             <button class="link-opacity profile__edit-button profile__edit-button_place_about-profile"
               aria-label="редактировать профиль" type="button">
             </button>
           </div>
-          <p class="profile__subtitle">Исследователь океана</p>
+          <p class="profile__subtitle">Чем занимется автор</p>
         </div>
       </div>
       <button class="link-opacity profile__add-button" aria-label="добавить" type="button">
@@ -53,12 +52,12 @@
         aria-label="закрыть"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup__form popup__form_place_profile" name="edit_profile" novalidate>
-        <input class="popup__form-text popup__form-text_type_profile-name" type="text" id="place_name" name="place_name"
+        <input class="popup__form-text popup__form-text_type_profile-name" type="text" id="name-profile" name="name"
           required placeholder="Имя" minlength="2" maxlength="40" autocomplete="off">
-        <span class="error error_place_name-error" id="place_name-error"></span>
-        <input class="popup__form-text popup__form-text_type_profile-about" type="text" id="place_about"
-          name="place_about" required placeholder="О себе" minlength="2" maxlength="200" autocomplete="off">
-        <span class="error error_place_about-error" id="place_about-error"></span>
+        <span class="error error_place_name-error" id="name-profile-error"></span>
+        <input class="popup__form-text popup__form-text_type_profile-about" type="text" id="about" name="about" required
+          placeholder="О себе" minlength="2" maxlength="200" autocomplete="off">
+        <span class="error error_place_about-error" id="about-error"></span>
         <button class="popup__save-button" type="submit">Сохранить</button>
       </form>
     </div>
@@ -69,12 +68,12 @@
       <button class="link-opacity popup__close-button" type="button" aria-label="закрыть"></button>
       <h2 class="popup__title popup__title_place_element">Новое место</h2>
       <form class="popup__form popup__form_place_element" name="add_profile" novalidate>
-        <input class="popup__form-text popup__form-text_type_element-name" type="text" id="place_image-name"
-          name="place_image-name" required placeholder="Название" minlength="2" maxlength="30" autocomplete="off">
-        <span class="error error_place_image-name-error" id="place_image-name-error"></span>
-        <input class="popup__form-text popup__form-text_type_image" type="url" id="place_image" name="place_image"
-          required placeholder="Ссылка на картинку" autocomplete="off">
-        <span class="error error_place_image-error" id="place_image-error"></span>
+        <input class="popup__form-text popup__form-text_type_element-name" type="text" id="name-card" name="name"
+          required placeholder="Название" minlength="2" maxlength="30" autocomplete="off">
+        <span class="error error_place_image-name-error" id="name-card-error"></span>
+        <input class="popup__form-text popup__form-text_type_image" type="url" id="link" name="link" required
+          placeholder="Ссылка на картинку" autocomplete="off">
+        <span class="error error_place_image-error" id="link-error"></span>
         <button class="popup__save-button" type="submit">Создать</button>
       </form>
     </div>
@@ -91,11 +90,11 @@
   <section class="popup popup_place_avatar">
     <div class="popup__window popup__window_place_avatar">
       <button class="link-opacity popup__close-button" type="button" aria-label="закрыть"></button>
-      <h2 class="popup__title">Обновить аватар</h2>
+      <h2 class="popup__title popup__title_place_avatar">Обновить аватар</h2>
       <form class="popup__form popup__form_place_avatar" name="edit_avatar" novalidate>
-        <input class="popup__form-text popup__form-text_type_avatar" type="url" id="place_avatar" name="place_avatar"
-          required placeholder="Ссылка на аватар" autocomplete="off">
-        <span class="error error_place_avatar-error" id="place_avatar-error"></span>
+        <input class="popup__form-text popup__form-text_type_avatar" type="url" id="avatar" name="avatar" required
+          placeholder="Ссылка на аватар" autocomplete="off">
+        <span class="error error_place_avatar-error" id="avatar-error"></span>
         <button class="popup__save-button" type="submit">Сохранить</button>
       </form>
     </div>
@@ -104,14 +103,14 @@
   <section class="popup popup_place_delete-card">
     <form class="popup__window popup__window_place_delete-card" name="delete_popup" novalidate>
       <button class="link-opacity popup__close-button" type="button" aria-label="закрыть"></button>
-      <h2 class="popup__title">Вы уверены?</h2>
+      <h2 class="popup__title popup__title_place_delete-card">Вы уверены?</h2>
       <button class="popup__save-button" type="submit">Да</button>
     </form>
   </section>
 
   <template id="element-template">
     <li class="element">
-      <button class="element__button-delete" type="button" aria-label="удалить"></button>
+      <button class="element__button-delete element__button-delete_active" type="button" aria-label="удалить"></button>
       <img class="element__image" src="#" alt="#">
       <div class="element__container">
         <h2 class="element__title"></h2>

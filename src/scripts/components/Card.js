@@ -1,19 +1,26 @@
 export default class Card{
 
-  constructor (data, cardSelector, handleCardClick, api){
+  constructor (data, cardSelector, myId, api, {handleCardClick, handleOpenPopupWithSubmit}){
+    
     this._name = data.name;
     this._link = data.link;
-    this._userId = data._id;
+    this._id = data._id;
     this._likes = data.likes;
-    this._ownerId = data.owner._id
+    this._ownerId = data.owner;
+
     this._cardSelector = cardSelector;
+    this._myId = myId
+    this._api = api;
+
     this._handleOpenImage = handleCardClick;
-
-    this._api = api
+    this._handleOpenPopupWithSubmit = handleOpenPopupWithSubmit;
+   
     this._element = this._getTemplate();
+    this._deleteButton = this._element.querySelector('.element__button-delete')
     this._likeButton = this._element.querySelector('.element__button-like')
+    this._likeCounter = this._element.querySelector('#like-counter')
   }
-
+  
   _getTemplate() {
     const elementTemplate = document
     .querySelector(this._cardSelector)
@@ -24,39 +31,59 @@ export default class Card{
     return elementTemplate;
   }
 
-  generateCard(){
-
+  generateCard () {
     const cardImage = this._element.querySelector('.element__image')
     const cardImageTitle = this._element.querySelector('.element__title')
 
+
+    this._checkDeleteButton()
+    this._checkLike()
     this._setEventListeners();
 
     cardImage.src = this._link;
     cardImage.alt = this._name;
     cardImageTitle.textContent = this._name;
+    this._likeCounter.textContent = this._likes.length
     
     return this._element;
   }
 
-  _likeElement (evt) {
-    evt.target.classList.toggle('element__button-like_active');
-    
-    const likeCounter = this._element.querySelector('#like-counter')
-    if(this._likeButton.classList.contains('element__button-like_active')){
-
-      likeCounter.innerHTML = (likeCounter.innerHTML | 0) +1
+  _checkLike(){
+    if (this._likes.map(item=>item._id).includes(this._myId)){
+      this._likeButton.classList.add('element__button-like_active')
     }
     else{
-      likeCounter.innerHTML -= 1
+      this._likeButton.classList.remove('element__button-like_active')
     }
   }
 
-  _deleteElement = () =>{
-    this._api
-    .removeCard(this._ownerId)
-    .then((evt)=>{evt.target.closest('.element').remove();})
-    .catch((err) => {console.log(err)})
-  };
+  _checkDeleteButton(){
+    if (this._ownerId._id === this._myId){
+      this._deleteButton.classList.add('element__button-delete_active')
+    }
+    else{
+      this._deleteButton.classList.remove('element__button-delete_active')
+    }
+  }
+
+  _handleClickLike = () =>{
+    if (this._likeButton.classList.contains('element__button-like_active')){
+      this._api
+      .removeLike(this._id)
+      .then((res)=> this._likeCounter.textContent = res.likes.length)
+      .then((res)=> res.likes = this._likes)
+      .catch((err) => {console.log(err)})
+      .finally(()=> this._likeButton.classList.remove('element__button-like_active'))
+    }
+    else{
+      this._api
+      .addLike(this._id)
+      .then((res)=> this._likeCounter.textContent = res.likes.length)
+      .then((res)=> res.likes = this._likes)
+      .catch((err) => {console.log(err)})
+      .finally(()=> this._likeButton.classList.add('element__button-like_active'))
+    }
+  }
 
   _setEventListeners = () => {
 
@@ -64,15 +91,14 @@ export default class Card{
       this._handleOpenImage(evt.target);
     }) 
 
-    this._element.querySelector('.element__button-delete').addEventListener('click', (evt)=>{
+    this._deleteButton.addEventListener('click', (evt)=>{
       evt.stopPropagation(evt);
-      this._deleteElement(evt)
+      this._handleOpenPopupWithSubmit()
       })
 
-    this._likeButton.addEventListener('click', (evt)=>{
+    this._element.querySelector('.element__button-like').addEventListener('click', (evt)=>{
       evt.stopPropagation();
-      this._likeElement(evt)
-    });
+      this._handleClickLike()
+    })
   }
-
 }

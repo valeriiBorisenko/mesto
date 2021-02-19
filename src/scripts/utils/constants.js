@@ -15,8 +15,6 @@ export const elementContainer = document.querySelector('.elements__container');
 
 export const popupPlaceElement = document.querySelector('.popup_place_element');
 export const popupFormElement = document.querySelector('.popup__form_place_element');
-export const popupInputElementTitle = document.querySelector('.popup__form-text_type_element-name');
-export const popupInputElementImage = document.querySelector('.popup__form-text_type_image');
 
 export const addElementButton = document.querySelector('.profile__add-button');
 
@@ -28,7 +26,6 @@ export const editButtonAvatar = document.querySelector('.profile__edit-button_pl
 export const popupFormPlaceAvatar = document.querySelector('.popup__form_place_avatar');
 export const popupFormInputPlaceAvatar = document.querySelector('.popup__form-text_type_avatar');
 
-
 /*image*/
 
 export const popupPlaceImage = document.querySelector('.popup_place_image');
@@ -36,7 +33,6 @@ export const popupPlaceImage = document.querySelector('.popup_place_image');
 /*delete*/
 
 export const popupPlaceDeleteCard = document.querySelector('.popup_place_delete-card')
-export const buttonDeleteCard = document.querySelector('.popup__save-button_place')
 
 export const validationConfig = {
 
