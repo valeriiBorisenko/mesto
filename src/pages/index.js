@@ -37,6 +37,7 @@ const userInfo = new UserInfo (profileName, profileAbout, profileAvatar)
 const cardList = new Section(cardElementObj,  elementContainer);
 
 let userData
+let cardId
 
 const api = new Api ({
   url: "https://mesto.nomoreparties.co/v1/cohort-20/",
@@ -46,29 +47,27 @@ const api = new Api ({
   }
 })
 
-api.getUserData()
-   .then((res)=> {
-   userInfo.setUserInfo(res.name, res.about)
-   userInfo.setUserAvatar(res.avatar)
-   userData = res._id
-  })
-   .catch((err) => {console.log(err);
+api
+.getUserData()
+.then((res)=> {
+  userInfo.setUserInfo(res.name, res.about)
+  userInfo.setUserAvatar(res.avatar)
+  userData = res._id
 })
+ .catch((err) => {console.log(err)})
 
 api.getAllCards()
-.then((res)=>{
-  cardList.renderItems(res)})
-.catch((err) => {console.log(err);
+  .then((res)=> cardList.renderItems(res))
+  .catch((err) => {console.log(err);
 })
 
 function cardElementObj(item){
-  const card = new Card(item,  '#element-template', userData, api, handleCardClick, handleOpenPopupWithSubmit)
+  const card = new Card(item,  '#element-template', userData, api, {
+    handleCardClick(evt) {openPopupImage.open(evt.src, evt.alt)}, 
+    handleOpenPopupWithSubmit() {popupWithDeleteElement.open(cardId = item._id, cardElement)},
+  })
   const cardElement = card.generateCard();
   cardList.setItem(cardElement)
-}
-
-function handleCardClick(evt) {
-  openPopupImage.open(evt.src, evt.alt);
 }
 
 function openPopupProfile(){
@@ -123,24 +122,19 @@ function openPopupElement(){
 
 const popupWithDeleteElement = new PopupWithSubmit({
   popupSelector: popupPlaceDeleteCard,
-  submitForm: () =>{
+  submit: ()=>{
     api
-    .removeCard()
-    .then(()=> popupWithDeleteElement.deleteCard(res._id))
+    .removeCard(cardId)
+    .then(()=> popupWithDeleteElement.deleteCard())
     .catch((err) => {console.log(err)})
     .finally(()=> popupWithDeleteElement.close())
-  }
-})
-
-function handleOpenPopupWithSubmit(){
-  popupWithDeleteElement.open()
-}
+} })
 
 popupWithFormProfile.setEventListeners();
 popupWithFormAvatar.setEventListeners();
 popupWithFormElement.setEventListeners();
 openPopupImage.setEventListeners()
-popupWithDeleteElement.setEventListeners();
+popupWithDeleteElement.setEventListeners()
 
 avatarValidAndClear.enableValidation();
 profileValidAndClear.enableValidation();
