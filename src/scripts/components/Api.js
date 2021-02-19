@@ -68,13 +68,10 @@ export default class Api{
     .then(onError)
   }
 
-  addLike(likes){
+  addLike(id){
     return fetch(`${this._url}cards/likes/${id}`, {
-      method: "POST",
+      method: "PUT",
       headers: this._headers,
-      body: JSON.stringify({
-        likes: likes.length
-      }),
     })
     .then(onError)
   }

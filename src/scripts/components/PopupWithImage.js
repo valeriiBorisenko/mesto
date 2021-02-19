@@ -12,5 +12,10 @@ export default class popupWithImage extends Popup{
     this._popupImageTitle.textContent = name;
     this._popupImage.alt = name;
     super.open(); 
-  } 
+  }
+
+  delete = (evt) =>{
+    evt.preventDefault()
+    this._element.parent.remove()
+  }
 }

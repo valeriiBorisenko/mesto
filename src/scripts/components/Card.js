@@ -1,6 +1,6 @@
 export default class Card{
 
-  constructor (data, cardSelector, api, handleCardClick, handleOpenPopupWithSubmit, handleClickLike){
+  constructor (data, cardSelector, myId, api, handleCardClick, handleOpenPopupWithSubmit){
     
     this._name = data.name;
     this._link = data.link;
@@ -9,12 +9,14 @@ export default class Card{
     this._ownerId = data.owner;
 
     this._cardSelector = cardSelector;
+    this._myId = myId
     this._api = api;
+
     this._handleOpenImage = handleCardClick;
     this._handleOpenPopupWithSubmit = handleOpenPopupWithSubmit;
-    this._handleClickLike = handleClickLike;
    
     this._element = this._getTemplate();
+    this._deleteButton = this._element.querySelector('.element__button-delete')
   }
   
   _getTemplate() {
@@ -27,11 +29,16 @@ export default class Card{
     return elementTemplate;
   }
 
-  generateCard(){
-
+  generateCard () {
     const cardImage = this._element.querySelector('.element__image')
     const cardImageTitle = this._element.querySelector('.element__title')
     const likeCounter = this._element.querySelector('#like-counter')
+    if (this._ownerId._id === this._myId){
+      this._deleteButton.classList.add('element__button-delete_active')
+    }
+    else{
+      this._deleteButton.classList.remove('element__button-delete_active')
+    }
 
     this._setEventListeners();
 
@@ -43,33 +50,21 @@ export default class Card{
     return this._element;
   }
 
-  /*_likeElement (evt) {
-    evt.target.classList.toggle('element__button-like_active');
-    
-    if(this._likeButton.classList.contains('element__button-like_active')){
-
-      likeCounter.innerHTML = (likeCounter.innerHTML | 0) +1
-    }
-    else{
-      likeCounter.innerHTML -= 1
-    }
-  }*/
-
   _setEventListeners = () => {
 
     this._element.querySelector('.element__image').addEventListener('click', (evt) => { 
       this._handleOpenImage(evt.target);
     }) 
 
-    this._element.querySelector('.element__button-delete').addEventListener('click', (evt)=>{
+    this._deleteButton.addEventListener('click', (evt)=>{
       evt.stopPropagation(evt);
       this._handleOpenPopupWithSubmit()
       })
 
-    this._element.querySelector('.element__button-like').addEventListener('click', (evt)=>{
+    /*this._element.querySelector('.element__button-like').addEventListener('click', (evt)=>{
       evt.stopPropagation();
       this._handleClickLike()
-    });
+    });*/
   }
 
 }

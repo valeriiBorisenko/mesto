@@ -33,7 +33,6 @@ export const popupPlaceImage = document.querySelector('.popup_place_image');
 /*delete*/
 
 export const popupPlaceDeleteCard = document.querySelector('.popup_place_delete-card')
-export const buttonDeleteCard = document.querySelector('.popup__save-button_place')
 
 export const validationConfig = {
 

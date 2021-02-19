@@ -19,7 +19,6 @@ import {
   popupPlaceAvatar,
   profileAvatar,
   popupPlaceDeleteCard,
-  buttonDeleteCard,
 } from '../scripts/utils/constants.js'
 import Card from '../scripts/components/Card.js';
 import Section from '../scripts/components/Section.js';
@@ -35,7 +34,9 @@ const cardValidAndClear = new FormValidator(validationConfig, popupFormElement);
 const avatarValidAndClear = new FormValidator(validationConfig, popupFormPlaceAvatar);
 const openPopupImage = new PopupWithImage(popupPlaceImage)
 const userInfo = new UserInfo (profileName, profileAbout, profileAvatar)
-const cardList = new Section(cardElementObj, elementContainer);
+const cardList = new Section(cardElementObj,  elementContainer);
+
+let userData
 
 const api = new Api ({
   url: "https://mesto.nomoreparties.co/v1/cohort-20/",
@@ -45,18 +46,25 @@ const api = new Api ({
   }
 })
 
-Promise.all([api.getUserData(), api.getAllCards()])
-.then(([user, cards])=>{
-  userInfo.setUserInfo(user.name, user.about)
-  userInfo.setUserAvatar(user.avatar)
-  cardList.renderItems(cards)})
+api.getUserData()
+   .then((res)=> {
+   userInfo.setUserInfo(res.name, res.about)
+   userInfo.setUserAvatar(res.avatar)
+   userData = res._id
+  })
+   .catch((err) => {console.log(err);
+})
+
+api.getAllCards()
+.then((res)=>{
+  cardList.renderItems(res)})
 .catch((err) => {console.log(err);
 })
 
 function cardElementObj(item){
-  const card = new Card(item, '#element-template', api, handleCardClick, handleOpenPopupWithSubmit)
+  const card = new Card(item,  '#element-template', userData, api, handleCardClick, handleOpenPopupWithSubmit)
   const cardElement = card.generateCard();
-  cardList.setItem(cardElement);
+  cardList.setItem(cardElement)
 }
 
 function handleCardClick(evt) {
@@ -76,8 +84,8 @@ const popupWithFormProfile = new PopupWithForm({
     api
     .patchUserData(data)
     .then((res)=> userInfo.setUserInfo(res.name, res.about))
-    .catch((err) => {console.log(err)});
-    popupWithFormProfile.close();
+    .catch((err) => {console.log(err)})
+    .finally(()=> popupWithFormProfile.close())
   }
 })
 
@@ -92,8 +100,8 @@ const popupWithFormAvatar = new PopupWithForm({
     api
     .patchUserAvatar(res)
     .then((res)=> userInfo.setUserAvatar(res.avatar))
-    .catch((err) => {console.log(err)});
-      popupWithFormAvatar.close();
+    .catch((err) => {console.log(err)})
+    .finally(()=> popupWithFormAvatar.close())
   }
 })
 
@@ -102,11 +110,9 @@ const popupWithFormElement = new PopupWithForm({
   submitForm: (data) =>{
     api
     .addNewCard(data)
-    .then((res)=> cardElementObj({
-      name: res.name, 
-      link: res.link}))
-    .catch((err) => {console.log(err)});
-     popupWithFormElement.close()
+    .then((res)=> cardElementObj(res))
+    .catch((err) => {console.log(err)})
+    .finally(()=> popupWithFormElement.close())
   }
 })
 
@@ -115,25 +121,26 @@ function openPopupElement(){
   cardValidAndClear.clearErrorMessage()
 }
 
-const popupWithSubmit = new PopupWithSubmit({
+const popupWithDeleteElement = new PopupWithSubmit({
   popupSelector: popupPlaceDeleteCard,
-  handleDeleteCard:()=>{
+  submitForm: () =>{
     api
-    .removeCard(_id)
-    .then((res)=>{res.target.closest('.element').remove();})
+    .removeCard()
+    .then(()=> popupWithDeleteElement.deleteCard(res._id))
     .catch((err) => {console.log(err)})
+    .finally(()=> popupWithDeleteElement.close())
   }
 })
 
 function handleOpenPopupWithSubmit(){
-  popupWithSubmit.open()
-};
+  popupWithDeleteElement.open()
+}
 
 popupWithFormProfile.setEventListeners();
 popupWithFormAvatar.setEventListeners();
-popupWithSubmit.setEventListeners();
 popupWithFormElement.setEventListeners();
 openPopupImage.setEventListeners()
+popupWithDeleteElement.setEventListeners();
 
 avatarValidAndClear.enableValidation();
 profileValidAndClear.enableValidation();
