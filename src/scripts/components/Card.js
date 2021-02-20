@@ -1,6 +1,6 @@
 export default class Card{
 
-  constructor (data, cardSelector, myId, api, {handleCardClick, handleOpenPopupWithSubmit}){
+  constructor (data, cardSelector, myId, api, {handleCardClick, handleOpenPopupWithSubmit, handleClickLike}){
     
     this._name = data.name;
     this._link = data.link;
@@ -14,6 +14,7 @@ export default class Card{
 
     this._handleOpenImage = handleCardClick;
     this._handleOpenPopupWithSubmit = handleOpenPopupWithSubmit;
+    this._handleClickLike = handleClickLike;
    
     this._element = this._getTemplate();
     this._deleteButton = this._element.querySelector('.element__button-delete')
@@ -66,25 +67,6 @@ export default class Card{
     }
   }
 
-  _handleClickLike = () =>{
-    if (this._likeButton.classList.contains('element__button-like_active')){
-      this._api
-      .removeLike(this._id)
-      .then((res)=> this._likeCounter.textContent = res.likes.length)
-      .then((res)=> res.likes = this._likes)
-      .catch((err) => {console.log(err)})
-      .finally(()=> this._likeButton.classList.remove('element__button-like_active'))
-    }
-    else{
-      this._api
-      .addLike(this._id)
-      .then((res)=> this._likeCounter.textContent = res.likes.length)
-      .then((res)=> res.likes = this._likes)
-      .catch((err) => {console.log(err)})
-      .finally(()=> this._likeButton.classList.add('element__button-like_active'))
-    }
-  }
-
   _setEventListeners = () => {
 
     this._element.querySelector('.element__image').addEventListener('click', (evt) => { 
@@ -98,7 +80,7 @@ export default class Card{
 
     this._element.querySelector('.element__button-like').addEventListener('click', (evt)=>{
       evt.stopPropagation();
-      this._handleClickLike()
+      this._handleClickLike(this._likeButton, this._id, this._likeCounter, this._likes)
     })
   }
 }
