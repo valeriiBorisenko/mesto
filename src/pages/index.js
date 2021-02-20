@@ -34,7 +34,7 @@ const cardValidAndClear = new FormValidator(validationConfig, popupFormElement);
 const avatarValidAndClear = new FormValidator(validationConfig, popupFormPlaceAvatar);
 const openPopupImage = new PopupWithImage(popupPlaceImage)
 const userInfo = new UserInfo (profileName, profileAbout, profileAvatar)
-const cardList = new Section(cardElementObj,  elementContainer);
+const cardList = new Section(cardElementObj, elementContainer);
 
 let userData
 let cardId
@@ -47,24 +47,46 @@ const api = new Api ({
   }
 })
 
-api
-.getUserData()
-.then((res)=> {
-  userInfo.setUserInfo(res.name, res.about)
-  userInfo.setUserAvatar(res.avatar)
-  userData = res._id
+Promise.all([api.getUserData(), api.getAllCards()])
+.then(([user, cards])=>{
+  userInfo.setUserInfo(user.name, user.about)
+  userInfo.setUserAvatar(user.avatar)
+  userData = user._id
+  cardList.renderItems(cards.reverse())
 })
- .catch((err) => {console.log(err)})
-
-api.getAllCards()
-  .then((res)=> cardList.renderItems(res))
-  .catch((err) => {console.log(err);
+.then(()=>{
+  editButtonAboutProfile.addEventListener('click', openPopupProfile);
+  editButtonAvatar.addEventListener('click', openPopupAvatar)
+  addElementButton.addEventListener('click', openPopupElement);
 })
+.catch((err) => {console.log(err);})
 
 function cardElementObj(item){
   const card = new Card(item,  '#element-template', userData, api, {
     handleCardClick(evt) {openPopupImage.open(evt.src, evt.alt)}, 
     handleOpenPopupWithSubmit() {popupWithDeleteElement.open(cardId = item._id, cardElement)},
+    handleClickLike(likeButton, idData, likeCounter, likesData) {
+      if (likeButton.classList.contains('element__button-like_active')){
+        api
+        .removeLike(idData)
+        .then((res)=>{
+          likesData.length = res.likes.length
+          likeCounter.textContent = likesData.length
+        })
+        .then(()=>likeButton.classList.remove('element__button-like_active'))
+        .catch((err) => {console.log(err)})
+      }
+      else{
+        api
+        .addLike(idData)
+        .then((res)=>{
+          likesData.length = res.likes.length
+          likeCounter.textContent = likesData.length
+        })          
+        .then(()=> likeButton.classList.add('element__button-like_active'))
+        .catch((err) => {console.log(err)})
+      }
+    }
   })
   const cardElement = card.generateCard();
   cardList.setItem(cardElement)
@@ -128,7 +150,8 @@ const popupWithDeleteElement = new PopupWithSubmit({
     .then(()=> popupWithDeleteElement.deleteCard())
     .catch((err) => {console.log(err)})
     .finally(()=> popupWithDeleteElement.close())
-} })
+  }
+})
 
 popupWithFormProfile.setEventListeners();
 popupWithFormAvatar.setEventListeners();
@@ -139,7 +162,3 @@ popupWithDeleteElement.setEventListeners()
 avatarValidAndClear.enableValidation();
 profileValidAndClear.enableValidation();
 cardValidAndClear.enableValidation();
-
-editButtonAboutProfile.addEventListener('click', openPopupProfile);
-editButtonAvatar.addEventListener('click', openPopupAvatar)
-addElementButton.addEventListener('click', openPopupElement);
