@@ -59,6 +59,8 @@ Promise.all([api.getUserData(), api.getAllCards()])
   editButtonAvatar.addEventListener('click', openPopupAvatar)
   addElementButton.addEventListener('click', openPopupElement);
 })
+.then(()=> document.querySelector('.loading').classList.remove('loading_active'))
+
 .catch((err) => {console.log(err);})
 
 function cardElementObj(item){
